@@ -5,9 +5,14 @@ from course.models import Course
 
 class Lesson(models.Model):
     """ Модель "Урок" """
-    title = models.ForeignKey(
+    course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
+    )
+    title = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
         help_text='Напишите название урока',
         verbose_name='Название'
     )
