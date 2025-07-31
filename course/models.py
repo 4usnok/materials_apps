@@ -7,7 +7,6 @@ class Course(models.Model):
     description = models.TextField(max_length=100, blank=True, null=True, help_text='Заполните описание курса')
 
     class Meta:
-        fields = '__all__'
         ordering = [
             'title',
             'image',

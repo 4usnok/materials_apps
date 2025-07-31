@@ -7,7 +7,6 @@ class User(models.Model):
     avatar = models.ImageField(max_length=50, blank=True, null=True, help_text='Загрузите аватарку пользователя')
 
     class Meta:
-        fields = '__all__'
         ordering = [
             'phone',
             'city',

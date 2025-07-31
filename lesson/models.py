@@ -11,7 +11,6 @@ class Lesson(models.Model):
     url_on_video = models.URLField(max_length=50, blank=True, null=True, help_text='Загрузите ссылку на видео урока')
 
     class Meta:
-        fields = '__all__'
         ordering = [
             'title',
             'description',
