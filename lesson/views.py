@@ -26,4 +26,3 @@ class LessonAPIDestroy(generics.DestroyAPIView):
 class LessonList(generics.RetrieveAPIView):
     """ Просмотр отдельного урока """
     queryset = Lesson.objects.all()
-    serializer_class = LessonSerializers
