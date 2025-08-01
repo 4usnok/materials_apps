@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cb82f50d-5915-46dd-ae4d-5a98784cba62" name="Changes" comment="homework_30_1 part 3 fix final">
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/course/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/course/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/course/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/course/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "4usnok"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/4usnok/DZ5_DRF_materials_apps.git",
+    "accountId": "b6fff8b8-8a9e-4db4-9f40-fc01de9a8e91"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="30e1CrrULRXmBsIfboCEqxqrqCt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "#1 on homework__30__1",
+    "last_opened_file_path": "D:/python/Project_skypro/DZ_4_Django"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cb82f50d-5915-46dd-ae4d-5a98784cba62" name="Changes" comment="" />
+      <created>1753973100216</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753973100216</updated>
+    </task>
+    <task id="LOCAL-00001" summary="commit for main">
+      <option name="closed" value="true" />
+      <created>1753976340513</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1753976340513</updated>
+    </task>
+    <task id="LOCAL-00002" summary="commit for develop">
+      <option name="closed" value="true" />
+      <created>1753976637331</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753976637331</updated>
+    </task>
+    <task id="LOCAL-00003" summary="commit for homework_30_1">
+      <option name="closed" value="true" />
+      <created>1753976845977</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1753976845977</updated>
+    </task>
+    <task id="LOCAL-00004" summary="homework_30_1 part 1-2">
+      <option name="closed" value="true" />
+      <created>1753979976936</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1753979976936</updated>
+    </task>
+    <task id="LOCAL-00005" summary="homework_30_1 part 3">
+      <option name="closed" value="true" />
+      <created>1753989834983</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1753989834983</updated>
+    </task>
+    <task id="LOCAL-00006" summary="homework_30_1 part 3 fix">
+      <option name="closed" value="true" />
+      <created>1753989966949</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1753989966949</updated>
+    </task>
+    <task id="LOCAL-00007" summary="homework_30_1 part 3 fix">
+      <option name="closed" value="true" />
+      <created>1753990019700</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1753990019700</updated>
+    </task>
+    <task id="LOCAL-00008" summary="homework_30_1 part 3 fix">
+      <option name="closed" value="true" />
+      <created>1753990386643</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1753990386643</updated>
+    </task>
+    <task id="LOCAL-00009" summary="homework_30_1 part 3 fix">
+      <option name="closed" value="true" />
+      <created>1753991133099</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1753991133099</updated>
+    </task>
+    <task id="LOCAL-00010" summary="homework_30_1 part 3 fix">
+      <option name="closed" value="true" />
+      <created>1753991604016</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1753991604016</updated>
+    </task>
+    <task id="LOCAL-00011" summary="homework_30_1 part 3 fix">
+      <option name="closed" value="true" />
+      <created>1753992339067</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1753992339067</updated>
+    </task>
+    <task id="LOCAL-00012" summary="homework_30_1 part 3 fix">
+      <option name="closed" value="true" />
+      <created>1753994259855</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1753994259855</updated>
+    </task>
+    <task id="LOCAL-00013" summary="homework_30_1 part 3 fix">
+      <option name="closed" value="true" />
+      <created>1753995393462</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1753995393462</updated>
+    </task>
+    <task id="LOCAL-00014" summary="homework_30_1 part 3 fix final">
+      <option name="closed" value="true" />
+      <created>1753996098718</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1753996098718</updated>
+    </task>
+    <task id="LOCAL-00015" summary="homework_30_1 part 3 fix final">
+      <option name="closed" value="true" />
+      <created>1753996423727</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1753996423727</updated>
+    </task>
+    <task id="LOCAL-00016" summary="homework_30_1 part 3 fix final">
+      <option name="closed" value="true" />
+      <created>1753996474081</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1753996474081</updated>
+    </task>
+    <task id="LOCAL-00017" summary="homework_30_1 part 3 fix final">
+      <option name="closed" value="true" />
+      <created>1753996716966</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1753996716966</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="commit for main" />
+    <MESSAGE value="commit for develop" />
+    <MESSAGE value="commit for homework_30_1" />
+    <MESSAGE value="homework_30_1 part 1-2" />
+    <MESSAGE value="homework_30_1 part 3" />
+    <MESSAGE value="homework_30_1 part 3 fix" />
+    <MESSAGE value="homework_30_1 part 3 fix final" />
+    <option name="LAST_COMMIT_MESSAGE" value="homework_30_1 part 3 fix final" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../Python_project_4/Project_4_Mailing_manager/config/settings.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
