@@ -124,5 +124,3 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
-USERNAME_FIELD = 'email' # email поле для логина - проверка при входе будет по этому полю
-REQUIRED_FIELDS = ['username', ] # дополнительное поле при создании суперпользователя

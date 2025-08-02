@@ -29,6 +29,9 @@ class User(AbstractUser):
         verbose_name='Аватарка',
     )
 
+    USERNAME_FIELD = 'email'  # email поле для логина - проверка при входе будет по этому полю
+    REQUIRED_FIELDS = ['username', ]  # дополнительное поле при создании суперпользователя
+
     def __str__(self):
         return self.phone
 
