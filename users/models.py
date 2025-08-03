@@ -1,5 +1,10 @@
+from tkinter.constants import CASCADE
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+from course.models import Course, Lesson
+
 
 class User(AbstractUser):
     """ Модель "Пользователь" """
@@ -44,3 +49,57 @@ class User(AbstractUser):
             'avatar',
         ]
 
+class Payments(models.Model):
+    """ Модель 'Платежи' """
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        help_text='Выберите пользователя',
+        verbose_name='Пользователь',
+    )
+    date_of_payment = models.DateField(
+        auto_now_add=True,
+        verbose_name='Дата оплаты',
+    )
+    paid_course = models.ForeignKey(
+        Course,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        help_text='Выберите название курса',
+        verbose_name='Оплаченный курс',
+    )
+    paid_lesson = models.ForeignKey(
+        Lesson,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        help_text='Выберите название урока',
+        verbose_name='Оплаченный урок',
+    )
+    payment_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        help_text='Укажите сумму в формате 100.00',
+        verbose_name='Сумма оплаты',
+    )
+    class PaymentMethod(models.TextChoices):
+        CASH = "cash", "Наличные",
+        TRANSFER = "transfer", "Перевод на счет"
+
+    payment_method = models.CharField(
+        max_length=20,
+        choices=PaymentMethod.choices,  # Подключаем варианты
+        verbose_name="Способ оплаты",
+        help_text = 'Выберите способ оплаты',
+    )
+
+    def __str__(self):
+        return self.payment_method
+
+    class Meta:
+        verbose_name = 'Платёж'
+        verbose_name_plural = 'Платежи'
+        ordering = ['-date_of_payment', 'user'] # Сортировка по убыванию сначала по дате, потом по пользователю
