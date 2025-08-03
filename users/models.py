@@ -34,7 +34,7 @@ class User(AbstractUser):
         verbose_name='Аватарка',
     )
 
-    USERNAME_FIELD = 'email'  # email поле для логина - проверка при входе будет по этому полю
+    USERNAME_FIELD = 'email'  # email поле для логина - проверка при входе будет по полю email
     REQUIRED_FIELDS = ['username', ]  # дополнительное поле при создании суперпользователя
 
     def __str__(self):
@@ -44,8 +44,8 @@ class User(AbstractUser):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
         ordering = [
-            'phone',
             'city',
+            'phone',
             'avatar',
         ]
 
