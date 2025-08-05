@@ -11,6 +11,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializers
 
 class PaymentsListAPIView(generics.ListAPIView):
+    """ Фильтрация и сортировка платежей """
     serializer_class = PaymentsSerializers
     queryset = Payments.objects.all()
     filter_backends = [DjangoFilterBackend, OrderingFilter]
