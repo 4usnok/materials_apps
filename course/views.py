@@ -23,11 +23,11 @@ class LessonAPIUpdate(generics.UpdateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
 
-class LessonAPIDestroy(generics.DestroyAPIView):
-    """ Удаление урока """
-    queryset = Lesson.objects.all()
-    serializer_class = LessonSerializers
-
 class LessonList(generics.RetrieveAPIView):
     """ Просмотр отдельного урока """
+    queryset = Lesson.objects.all()
+    serializer_class = PaymentsSerializers
+
+class LessonAPIDestroy(generics.DestroyAPIView):
+    """ Удаление урока """
     queryset = Lesson.objects.all()
