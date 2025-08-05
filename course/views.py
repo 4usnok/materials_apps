@@ -26,7 +26,7 @@ class LessonAPIUpdate(generics.UpdateAPIView):
 class LessonList(generics.RetrieveAPIView):
     """ Просмотр отдельного урока """
     queryset = Lesson.objects.all()
-    serializer_class = PaymentsSerializers
+    serializer_class = LessonSerializers
 
 class LessonAPIDestroy(generics.DestroyAPIView):
     """ Удаление урока """
