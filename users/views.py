@@ -17,3 +17,22 @@ class PaymentsListAPIView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ('paid_course', 'paid_lesson', 'payment_method')
     ordering_fields = ('date_of_payment', )
+
+class PaymentsAPICreate(generics.CreateAPIView):
+    """ Создание платежа """
+    queryset = Payments.objects.all()
+    serializer_class = PaymentsSerializers
+
+class PaymentsAPIUpdate(generics.UpdateAPIView):
+    """ Редактирование платежа """
+    queryset = Payments.objects.all()
+    serializer_class = PaymentsSerializers
+
+class PaymentsList(generics.RetrieveAPIView):
+    """ Просмотр отдельного платежа """
+    queryset = Payments.objects.all()
+    serializer_class = PaymentsSerializers
+
+class PaymentsAPIDestroy(generics.DestroyAPIView):
+    """ Удаление платежа """
+    queryset = Payments.objects.all()
