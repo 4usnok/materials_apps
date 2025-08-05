@@ -58,7 +58,6 @@ class Payments(models.Model):
         verbose_name='Пользователь',
     )
     date_of_payment = models.DateField(
-        auto_now_add=True,
         verbose_name='Дата оплаты',
     )
     paid_course = models.ForeignKey(
