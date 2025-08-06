@@ -37,7 +37,7 @@ class PaymentsAPIUpdate(generics.UpdateAPIView):
     serializer_class = PaymentsSerializers
 
 
-class PaymentsList(generics.RetrieveAPIView):
+class PaymentsDetailList(generics.RetrieveAPIView):
     """Просмотр отдельного платежа"""
 
     queryset = Payments.objects.all()
