@@ -1,2 +1,122 @@
 [
+{
+    "model": "users.payments",
+    "pk": 1,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2025-08-05",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "1111.99",
+        "payment_method": "cash"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 2,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2025-08-05",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "1111.99",
+        "payment_method": "cash"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 3,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2025-08-05",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "113331.99",
+        "payment_method": "cash"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 4,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2025-08-05",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "11311131.99",
+        "payment_method": "cash"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 5,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2025-08-05",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "11311131.99",
+        "payment_method": "transfer"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 6,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2025-08-05",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "11311.99",
+        "payment_method": "transfer"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 7,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2025-08-05",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "11311.99",
+        "payment_method": "transfer"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 8,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2021-02-03",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "11311.99",
+        "payment_method": "transfer"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 9,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2021-02-03",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "11311.99",
+        "payment_method": "transfer"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 10,
+    "fields": {
+        "user": null,
+        "date_of_payment": "2021-02-03",
+        "paid_course": null,
+        "paid_lesson": null,
+        "payment_amount": "11311.99",
+        "payment_method": "transfer"
+    }
+}
 ]
