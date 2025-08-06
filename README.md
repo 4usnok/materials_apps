@@ -16,8 +16,8 @@ pip install -r requirements.txt
 ## Приложение `course`
 Приложение предназначенное для работы с курсом и уроками
 1. Содержит `models.py`:
-* модель курса `Course`
-* модель курса `Lesson`
+* Модель курса `Course`
+* Модель урока `Lesson`
 2. Содержит `serializers.py`:
 * Сериализатор для модели `Lesson` -> `LessonSerializers`
 * Сериализатор для модели `Course` -> `CourseSerializers`
@@ -31,8 +31,8 @@ pip install -r requirements.txt
 ## Приложение `users`
 Приложение предназначенное для работы с пользователями и платежами
 1. Содержит `models.py`:
-* модель пользователя `User`
-* модель пользователя `Payments`
+* Модель пользователя `User`
+* Модель платежа `Payments`
 2. Содержит `serializers.py`:
 * Сериализатор для модели `User` -> `UserSerializers`
 * Сериализатор для модели `Payments` -> `PaymentsSerializers`
@@ -44,8 +44,13 @@ pip install -r requirements.txt
 * `PaymentsDetailList` -> Просмотр отдельного платежа
 * `PaymentsAPIDestroy` -> PaymentsAPIDestroy
 
+## Прочие файлы
+1. `.env.sample` -> Заполняется в первую очередь(предназначен для заполнений host, port, пароля от бд, названия бд и тд.)
+2. `payments_fixture.json` -> содержит json-файлы модели `Payments`
+3. `users_fixture.json` -> содержит json-файлы модели `User`
+4. `Readme.md` -> содержит документацию проекта
+
 # Полезные команды
-Полезные команды
 * Запуск сервера: `python manage.py runserver`,
 * Создание суперюзера(админка): `python manage.py createsuperuser`,
 * Создание миграций: `python manage.py makemigrations`,
