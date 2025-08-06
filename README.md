@@ -44,7 +44,7 @@ pip install -r requirements.txt
 * `PaymentsDetailList` -> Просмотр отдельного платежа
 * `PaymentsAPIDestroy` -> PaymentsAPIDestroy
 
-3. Полезные команды
+# Полезные команды
 Полезные команды
 * Запуск сервера: `python manage.py runserver`,
 * Создание суперюзера(админка): `python manage.py createsuperuser`,
