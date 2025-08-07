@@ -14,13 +14,47 @@ pip install -r requirements.txt
 ```
 # Содержание проекта
 ## Приложение `course`
-Приложение предназначенное для работы с курсом
-1. Содержит в `models.py` модель курса
-
-## Приложение `lesson`
-Приложение предназначенное для работы с уроками
-1. Содержит в `models.py` модель урока
+Приложение предназначенное для работы с курсом и уроками
+1. Содержит `models.py`:
+* Модель курса `Course`
+* Модель урока `Lesson`
+2. Содержит `serializers.py`:
+* Сериализатор для модели `Lesson` -> `LessonSerializers`
+* Сериализатор для модели `Course` -> `CourseSerializers`
+3. Содержит `views.py`:
+* `CourseViewSet` -> ViewSet CRUD для модели `Course`
+* `LessonAPIView` -> Просмотр списка уроков
+* `LessonAPICreate` -> Создание урока
+* `LessonAPIUpdate` -> Просмотр отдельного урока
+* `LessonAPIDestroy` -> Удаление урока
 
 ## Приложение `users`
-Приложение предназначенное для работы с пользователями
-1. Содержит в `models.py` модель пользователя
+Приложение предназначенное для работы с пользователями и платежами
+1. Содержит `models.py`:
+* Модель пользователя `User`
+* Модель платежа `Payments`
+2. Содержит `serializers.py`:
+* Сериализатор для модели `User` -> `UserSerializers`
+* Сериализатор для модели `Payments` -> `PaymentsSerializers`
+3. Содержит `views.py`:
+* `UserViewSet` -> ViewSet CRUD для модели `User`
+* `PaymentsListAPIView` -> Фильтрация и сортировка платежей
+* `PaymentsAPICreate` -> Создание платежа
+* `PaymentsAPIUpdate` -> Редактирование платежа
+* `PaymentsDetailList` -> Просмотр отдельного платежа
+* `PaymentsAPIDestroy` -> PaymentsAPIDestroy
+
+## Прочие файлы
+1. `.env.sample` -> Заполняется в первую очередь(предназначен для заполнений host, port, пароля от бд, названия бд и тд.)
+2. `payments_fixture.json` -> содержит json-файлы модели `Payments`
+3. `users_fixture.json` -> содержит json-файлы модели `User`
+4. `Readme.md` -> содержит документацию проекта
+
+# Полезные команды
+* Запуск сервера: `python manage.py runserver`,
+* Создание суперюзера(админка): `python manage.py createsuperuser`,
+* Создание миграций: `python manage.py makemigrations`,
+* Сохранение миграций: `python manage.py migrate`,
+* Откат всех миграций: `python manage.py migrate name_migration`, где `name_migration` -> название миграции.
+* Создание фикстуры для модели пользователей `User`: `python -Xutf8 manage.py dumpdata users.User --output users_fixture.json --indent 4`
+* Создание фикстуры для модели платежей `Payments`: `python -Xutf8 manage.py dumpdata users.Payments --output payments_fixture.json --indent 4`
