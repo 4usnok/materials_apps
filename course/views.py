@@ -1,4 +1,5 @@
 from rest_framework import generics, viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from course.models import Course, Lesson
 from course.serializers import CourseSerializers, LessonSerializers
@@ -9,6 +10,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     queryset = Course.objects.all()
     serializer_class = CourseSerializers
+    permission_classes = [IsAuthenticated]
 
 
 class LessonAPIView(generics.ListAPIView):
@@ -16,6 +18,7 @@ class LessonAPIView(generics.ListAPIView):
 
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
+    permission_classes = [IsAuthenticated]
 
 
 class LessonAPICreate(generics.CreateAPIView):
@@ -23,6 +26,7 @@ class LessonAPICreate(generics.CreateAPIView):
 
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
+    permission_classes = [IsAuthenticated]
 
 
 class LessonAPIUpdate(generics.UpdateAPIView):
@@ -30,6 +34,7 @@ class LessonAPIUpdate(generics.UpdateAPIView):
 
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
+    permission_classes = [IsAuthenticated]
 
 
 class LessonList(generics.RetrieveAPIView):
@@ -37,9 +42,11 @@ class LessonList(generics.RetrieveAPIView):
 
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
+    permission_classes = [IsAuthenticated]
 
 
 class LessonAPIDestroy(generics.DestroyAPIView):
     """Удаление урока"""
 
     queryset = Lesson.objects.all()
+    permission_classes = [IsAuthenticated]

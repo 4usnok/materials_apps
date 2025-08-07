@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, viewsets
 from rest_framework.filters import OrderingFilter
+from rest_framework.permissions import IsAuthenticated
 
 from users.models import Payments, User
 from users.serializers import PaymentsSerializers, UserSerializers
@@ -11,6 +12,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializers
+    permission_classes = [IsAuthenticated]
 
 
 class PaymentsListAPIView(generics.ListAPIView):
@@ -21,6 +23,7 @@ class PaymentsListAPIView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ("paid_course", "paid_lesson", "payment_method")
     ordering_fields = ("date_of_payment",)
+    permission_classes = [IsAuthenticated]
 
 
 class PaymentsAPICreate(generics.CreateAPIView):
@@ -28,6 +31,7 @@ class PaymentsAPICreate(generics.CreateAPIView):
 
     queryset = Payments.objects.all()
     serializer_class = PaymentsSerializers
+    permission_classes = [IsAuthenticated]
 
 
 class PaymentsAPIUpdate(generics.UpdateAPIView):
@@ -35,6 +39,7 @@ class PaymentsAPIUpdate(generics.UpdateAPIView):
 
     queryset = Payments.objects.all()
     serializer_class = PaymentsSerializers
+    permission_classes = [IsAuthenticated]
 
 
 class PaymentsDetailList(generics.RetrieveAPIView):
@@ -42,9 +47,11 @@ class PaymentsDetailList(generics.RetrieveAPIView):
 
     queryset = Payments.objects.all()
     serializer_class = PaymentsSerializers
+    permission_classes = [IsAuthenticated]
 
 
 class PaymentsAPIDestroy(generics.DestroyAPIView):
     """Удаление платежа"""
 
     queryset = Payments.objects.all()
+    permission_classes = [IsAuthenticated]
