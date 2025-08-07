@@ -15,7 +15,7 @@ router.register(r"users", UserViewSet, basename="users")
 urlpatterns = [
 
     # auth
-    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'), # регистрация
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # payments
