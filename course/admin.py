@@ -7,6 +7,7 @@ from course.models import Course, Lesson
 class CourseAdmin(admin.ModelAdmin):
     list_filter = ("id", "title")
 
+
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
     list_filter = ("id", "title")

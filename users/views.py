@@ -22,7 +22,7 @@ class UserCreateAPIView(CreateAPIView):
     serializer_class = UserSerializers
 
     def perform_create(self, serializer):
-        """ Создание нового экземпляра модели "User" """
+        """Создание нового экземпляра модели "User" """
         user = serializer.save(is_active=True)
         user.set_password(user.password)
         user.save()
@@ -47,7 +47,7 @@ class PaymentsAPICreate(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        """ Автоматическая подвязка поля пользователя к модели """
+        """Автоматическая подвязка поля пользователя к модели"""
         payments = serializer.save(is_active=True)
         payments.user = self.request.user
         payments.save()
