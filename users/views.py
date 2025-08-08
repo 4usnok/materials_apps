@@ -46,6 +46,12 @@ class PaymentsAPICreate(generics.CreateAPIView):
     serializer_class = PaymentsSerializers
     permission_classes = [IsAuthenticated]
 
+    def perform_create(self, serializer):
+        """ Автоматическая подвязка поля пользователя к модели """
+        payments = serializer.save(is_active=True)
+        payments.user = self.request.user
+        payments.save()
+
 
 class PaymentsAPIUpdate(generics.UpdateAPIView):
     """Редактирование платежа"""
