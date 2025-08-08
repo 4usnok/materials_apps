@@ -16,6 +16,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class UserCreateAPIView(CreateAPIView):
     """ Регистрация пользователя """
+
     queryset = User.objects.all()
     serializer_class = UserSerializers
 
