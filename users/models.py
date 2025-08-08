@@ -39,7 +39,7 @@ class User(AbstractUser):
     ]  # дополнительное поле при создании суперпользователя
 
     def __str__(self):
-        return self.phone
+        return self.email
 
     class Meta:
         verbose_name = "Пользователь"
