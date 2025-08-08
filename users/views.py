@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, viewsets
 from rest_framework.filters import OrderingFilter
+from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from users.models import Payments, User
@@ -13,6 +14,15 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializers
 
+class UserCreateAPIView(CreateAPIView):
+    """ Регистрация пользователя """
+    queryset = User.objects.all()
+    serializer_class = UserSerializers
+
+    def perform_create(self, serializer):
+        user = serializer.save(is_active=True)
+        user.set_password(user.password)
+        user.save()
 
 class PaymentsListAPIView(generics.ListAPIView):
     """Фильтрация и сортировка платежей"""

@@ -10,6 +10,7 @@ from users.views import (
     PaymentsListAPIView,
     UserViewSet,
     PaymentsDetailList,
+    UserCreateAPIView,
 )
 
 app_name = UsersConfig.name
@@ -18,10 +19,13 @@ router = DefaultRouter()
 router.register(r"users", UserViewSet, basename="users")
 
 urlpatterns = [
-    # auth
+    # auth and register
+    path(
+        "register/", UserCreateAPIView.as_view(), name="register"
+    ),
     path(
         "login/", TokenObtainPairView.as_view(), name="token_obtain_pair"
-    ),  # регистрация
+    ),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     # payments
     path("payments/", PaymentsListAPIView.as_view(), name="payments-list"),
