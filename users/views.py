@@ -12,7 +12,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializers
-    permission_classes = [IsAuthenticated]
 
 
 class PaymentsListAPIView(generics.ListAPIView):
