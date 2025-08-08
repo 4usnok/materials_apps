@@ -14,16 +14,19 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializers
 
+
 class UserCreateAPIView(CreateAPIView):
-    """ Регистрация пользователя """
+    """Регистрация пользователя"""
 
     queryset = User.objects.all()
     serializer_class = UserSerializers
 
     def perform_create(self, serializer):
+        """ Создание нового экземпляра модели "User" """
         user = serializer.save(is_active=True)
         user.set_password(user.password)
         user.save()
+
 
 class PaymentsListAPIView(generics.ListAPIView):
     """Фильтрация и сортировка платежей"""

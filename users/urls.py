@@ -20,12 +20,8 @@ router.register(r"users", UserViewSet, basename="users")
 
 urlpatterns = [
     # auth and register
-    path(
-        "register/", UserCreateAPIView.as_view(), name="register"
-    ),
-    path(
-        "login/", TokenObtainPairView.as_view(), name="token_obtain_pair"
-    ),
+    path("register/", UserCreateAPIView.as_view(), name="register"),
+    path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     # payments
     path("payments/", PaymentsListAPIView.as_view(), name="payments-list"),
