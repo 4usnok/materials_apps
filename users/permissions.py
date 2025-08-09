@@ -11,5 +11,5 @@ class IsModer(BasePermission):
 class IsOwner(BasePermission):
     """Класс для разрешения доступа только владельцам"""
 
-    def has_permission(self, request, view):
-        return request.user.groups.filter(name="owners").exists()
+    def has_object_permission(self, request, view, obj):
+        return request.user == obj.owner

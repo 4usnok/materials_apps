@@ -1,3 +1,4 @@
+from django.template.context_processors import request
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 
@@ -19,26 +20,23 @@ class CourseViewSet(viewsets.ModelViewSet):
             # Права для редактирования курса, доступа к определенному курсу
             # и возможности изменять некоторые поля курса
             self.permission_classes = [IsAuthenticated, IsModer | IsOwner]
-        elif self.action in ["create", "destroy"]:
-            # Права для создания нового курса или удаления
-            self.permission_classes = [IsAuthenticated, ~IsModer, IsOwner]
+        elif self.action == "create":
+            # Права для создания имеет авторизованный пользователь, но не модератор
+            self.permission_classes = [IsAuthenticated, ~IsModer]
+        elif self.action == "destroy":
+            # Права для удаления имеет авторизованный пользователь - владелец
+            self.permission_classes = [IsAuthenticated, IsOwner]
         return super().get_permissions()
 
     def perform_create(self, serializer):
         course = serializer.save(owner=self.request.user)
-        course.user = self.request.user
         course.save()
 
-    def perform_update(self, serializer):
-        course = serializer.save(owner=self.request.user)
-        course.user = self.request.user
-        course.save()
-
-    def perform_destroy(self, instance):
-        course = instance.save(owner=self.request.user)
-        course.user = self.request.user
-        course.save()
-
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.action == "list":
+            return queryset.filter(owner=self.request.user)
+        return queryset
 
 class LessonAPIView(generics.ListAPIView):
     """Просмотр списка уроков"""
@@ -57,7 +55,6 @@ class LessonAPICreate(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         lesson = serializer.save(owner=self.request.user)
-        lesson.user = self.request.user
         lesson.save()
 
 class LessonAPIUpdate(generics.UpdateAPIView):
