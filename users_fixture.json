@@ -3,41 +3,22 @@
     "model": "users.user",
     "pk": 1,
     "fields": {
-        "password": "6qndea3c8",
-        "last_login": null,
-        "is_superuser": false,
-        "username": "Nik",
+        "password": "pbkdf2_sha256$1000000$g34PVogVC31TMlyGsiR8sw$QNkEp2JFDhHFKu/LChytxkFOpoWhU0y5DyRTyPzOhE8=",
+        "last_login": "2025-08-08T23:21:23Z",
+        "is_superuser": true,
+        "username": "adminkakas",
         "first_name": "",
         "last_name": "",
-        "is_staff": false,
+        "is_staff": true,
         "is_active": true,
-        "date_joined": "2025-08-05T12:55:44.884Z",
-        "email": "kaka@gmail.com",
+        "date_joined": "2025-08-08T23:20:45Z",
+        "email": "kakas@gmail.com",
         "phone": null,
         "city": null,
         "avatar": "",
-        "groups": [],
-        "user_permissions": []
-    }
-},
-{
-    "model": "users.user",
-    "pk": 2,
-    "fields": {
-        "password": "3csfadada",
-        "last_login": null,
-        "is_superuser": false,
-        "username": "Kos",
-        "first_name": "",
-        "last_name": "",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2025-08-05T12:56:00.825Z",
-        "email": "kakasss@gmail.com",
-        "phone": null,
-        "city": null,
-        "avatar": "",
-        "groups": [],
+        "groups": [
+            2
+        ],
         "user_permissions": []
     }
 }

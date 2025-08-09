@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from course.models import Course, Lesson
 from course.serializers import CourseSerializers, LessonSerializers
-from course.permissions import IsModer, IsOwner
+from users.permissions import IsModer, IsOwner
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -13,28 +13,31 @@ class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializers
 
     def get_permissions(self):
-        """Права для разрешения доступа модераторам"""
-        if (
-            self.action == "list"
-            or self.action == "update"
-            or self.action == "retrieve"
-            or self.action == "partial_update"
-        ):
-            # Права для просмотра списка курсов, редактирования курса, доступа к одному курсу
+        """Права для разрешения доступа модераторам и владельцам """
+        # ["update", "retrieve", "partial_update"]
+        if self.action in ["update", "retrieve", "partial_update"]:
+            # Права для редактирования курса, доступа к определенному курсу
             # и возможности изменять некоторые поля курса
             self.permission_classes = [IsAuthenticated, IsModer | IsOwner]
-        elif self.action == "create" or self.action == "destroy":
+        elif self.action in ["create", "destroy"]:
             # Права для создания нового курса или удаления
-            self.permission_classes = [IsAuthenticated]
+            self.permission_classes = [IsAuthenticated, ~IsModer, IsOwner]
+        return super().get_permissions()
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        course = serializer.save(owner=self.request.user)
+        course.user = self.request.user
+        course.save()
 
     def perform_update(self, serializer):
-        serializer.save(user=self.request.user)
+        course = serializer.save(owner=self.request.user)
+        course.user = self.request.user
+        course.save()
 
     def perform_destroy(self, instance):
-        instance.save(user=self.request.user)
+        course = instance.save(owner=self.request.user)
+        course.user = self.request.user
+        course.save()
 
 
 class LessonAPIView(generics.ListAPIView):
@@ -42,7 +45,7 @@ class LessonAPIView(generics.ListAPIView):
 
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
-    permission_classes = [IsAuthenticated, IsModer | IsOwner]
+    permission_classes = [IsAuthenticated]
 
 
 class LessonAPICreate(generics.CreateAPIView):
@@ -53,8 +56,9 @@ class LessonAPICreate(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
+        lesson = serializer.save(owner=self.request.user)
+        lesson.user = self.request.user
+        lesson.save()
 
 class LessonAPIUpdate(generics.UpdateAPIView):
     """Редактирование урока"""
@@ -64,7 +68,9 @@ class LessonAPIUpdate(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated, IsModer | IsOwner]
 
     def perform_update(self, serializer):
-        serializer.save(user=self.request.user)
+        lesson = serializer.save(owner=self.request.user)
+        lesson.user = self.request.user
+        lesson.save()
 
 
 class LessonList(generics.RetrieveAPIView):
@@ -82,4 +88,6 @@ class LessonAPIDestroy(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_destroy(self, instance):
-        instance.save(user=self.request.user)
+        lesson = instance.save(owner=self.request.user)
+        lesson.user = self.request.user
+        lesson.save()

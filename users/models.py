@@ -57,8 +57,6 @@ class Payments(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        blank=True,
-        null=True,
         help_text="Выберите пользователя",
         verbose_name="Пользователь",
     )

@@ -48,7 +48,7 @@ class PaymentsAPICreate(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         """Автоматическая подвязка поля пользователя к модели"""
-        payments = serializer.save(is_active=True)
+        payments = serializer.save(user=self.request.user)
         payments.user = self.request.user
         payments.save()
 

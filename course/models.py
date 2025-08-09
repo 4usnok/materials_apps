@@ -11,8 +11,6 @@ class Course(models.Model):
     )
     title = models.CharField(
         max_length=50,
-        blank=True,
-        null=True,
         help_text="Напишите название курса",
         verbose_name="Название",
     )
@@ -56,8 +54,6 @@ class Lesson(models.Model):
     )
     title = models.CharField(
         max_length=50,
-        blank=True,
-        null=True,
         help_text="Напишите название урока",
         verbose_name="Название",
     )
