@@ -34,9 +34,9 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if self.action == "list":
-            return queryset.filter(owner=self.request.user)
-        return queryset
+        if not request.user.groups.filter(name="moders").exists(): # если не входит в группу модеров
+            return queryset.filter(owner=self.request.user) # показать для владельцев только их объекты
+        return queryset # А, если входит, то весь список
 
 class LessonAPIView(generics.ListAPIView):
     """Просмотр списка уроков"""
