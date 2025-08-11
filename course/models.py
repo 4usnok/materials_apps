@@ -1,13 +1,16 @@
 from django.db import models
 
+from config import settings
+
 
 class Course(models.Model):
     """Модель "Курс" """
 
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
+    )
     title = models.CharField(
         max_length=50,
-        blank=True,
-        null=True,
         help_text="Напишите название курса",
         verbose_name="Название",
     )
@@ -42,14 +45,15 @@ class Course(models.Model):
 class Lesson(models.Model):
     """Модель "Урок" """
 
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
+    )
     course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
     )
     title = models.CharField(
         max_length=50,
-        blank=True,
-        null=True,
         help_text="Напишите название урока",
         verbose_name="Название",
     )

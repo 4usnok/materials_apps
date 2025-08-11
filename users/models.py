@@ -1,12 +1,14 @@
-from course.models import Course, Lesson
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+from config import settings
+from course.models import Course, Lesson
 
 
 class User(AbstractUser):
     """Модель "Пользователь" """
 
-    email = models.EmailField(unique=True, verbose_name="email почта")
+    email = models.EmailField(unique=True, verbose_name="email-почта")
     phone = models.CharField(
         max_length=10,
         blank=True,
@@ -37,7 +39,7 @@ class User(AbstractUser):
     ]  # дополнительное поле при создании суперпользователя
 
     def __str__(self):
-        return self.phone
+        return self.email
 
     class Meta:
         verbose_name = "Пользователь"
@@ -53,10 +55,8 @@ class Payments(models.Model):
     """Модель 'Платежи'"""
 
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        blank=True,
-        null=True,
         help_text="Выберите пользователя",
         verbose_name="Пользователь",
     )

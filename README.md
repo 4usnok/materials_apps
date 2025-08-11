@@ -27,6 +27,8 @@ pip install -r requirements.txt
 * `LessonAPICreate` -> Создание урока
 * `LessonAPIUpdate` -> Просмотр отдельного урока
 * `LessonAPIDestroy` -> Удаление урока
+4. Содержит `permissions.py` -> классы прав доступа для групп админки
+
 
 ## Приложение `users`
 Приложение предназначенное для работы с пользователями и платежами
