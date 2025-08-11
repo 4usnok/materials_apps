@@ -14,7 +14,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializers
 
     def get_permissions(self):
-        """Права для разрешения доступа модераторам и владельцам """
+        """Права для разрешения доступа модераторам и владельцам"""
         if self.action in ["update", "retrieve", "partial_update"]:
             # Права для редактирования курса, доступа к определенному курсу
             # и возможности изменять некоторые поля курса
@@ -33,9 +33,14 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if not request.user.groups.filter(name="moders").exists(): # если не входит в группу модеров
-            return queryset.filter(owner=self.request.user) # показать для владельцев только их объекты
-        return queryset # А, если входит, то весь список
+        if not request.user.groups.filter(
+            name="moders"
+        ).exists():  # если не входит в группу модеров
+            return queryset.filter(
+                owner=self.request.user
+            )  # показать для владельцев только их объекты
+        return queryset  # А, если входит, то весь список
+
 
 class LessonAPIView(generics.ListAPIView):
     """Просмотр списка уроков"""
@@ -46,9 +51,13 @@ class LessonAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if not request.user.groups.filter(name="moders").exists(): # если не входит в группу модеров
-            return queryset.filter(owner=self.request.user) # показать для владельцев только их объекты
-        return queryset # А, если входит, то весь список
+        if not request.user.groups.filter(
+            name="moders"
+        ).exists():  # если не входит в группу модеров
+            return queryset.filter(
+                owner=self.request.user
+            )  # показать для владельцев только их объекты
+        return queryset  # А, если входит, то весь список
 
 
 class LessonAPICreate(generics.CreateAPIView):
@@ -56,18 +65,12 @@ class LessonAPICreate(generics.CreateAPIView):
 
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, ~IsModer]
 
     def perform_create(self, serializer):
         lesson = serializer.save(owner=self.request.user)
         lesson.save()
 
-    def get_permissions(self):
-        """Права для разрешения доступа модераторам и владельцам """
-        if self.action == "create":
-            # Права для создания имеет авторизованный пользователь, но не модератор
-            self.permission_classes = [IsAuthenticated, ~IsModer]
-        return super().get_permissions()
 
 class LessonAPIUpdate(generics.UpdateAPIView):
     """Редактирование урока"""
@@ -81,13 +84,6 @@ class LessonAPIUpdate(generics.UpdateAPIView):
         lesson.user = self.request.user
         lesson.save()
 
-    def get_permissions(self):
-        """Права для разрешения доступа модераторам и владельцам """
-        if self.action == "update":
-            # Права для редактирования урока авторизованный пользователь, модер или владелец
-            self.permission_classes = [IsAuthenticated, IsModer | IsOwner]
-        return super().get_permissions()
-
 
 class LessonList(generics.RetrieveAPIView):
     """Просмотр отдельного урока"""
@@ -96,28 +92,14 @@ class LessonList(generics.RetrieveAPIView):
     serializer_class = LessonSerializers
     permission_classes = [IsAuthenticated, IsModer | IsOwner]
 
-    def get_permissions(self):
-        """Права для разрешения доступа модераторам и владельцам """
-        if self.action == "retrieve":
-            # Права для просмотра определенного урока имеет авторизованный пользователь, владелец или модер
-            self.permission_classes = [IsAuthenticated, IsModer | IsOwner]
-        return super().get_permissions()
-
 
 class LessonAPIDestroy(generics.DestroyAPIView):
     """Удаление урока"""
 
     queryset = Lesson.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def perform_destroy(self, instance):
         lesson = instance.save(owner=self.request.user)
         lesson.user = self.request.user
         lesson.save()
-
-    def get_permissions(self):
-        """Права для разрешения доступа модераторам и владельцам """
-        if self.action == "destroy":
-            # Права для удаления имеет авторизованный пользователь - владелец
-            self.permission_classes = [IsAuthenticated, IsOwner]
-        return super().get_permissions()
