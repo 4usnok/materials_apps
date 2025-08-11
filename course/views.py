@@ -12,6 +12,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     queryset = Course.objects.all()
     serializer_class = CourseSerializers
+    permission_classes = [IsAuthenticated]
 
     def get_permissions(self):
         """Права для разрешения доступа модераторам и владельцам"""
@@ -33,7 +34,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if not request.user.groups.filter(
+        if not self.request.user.groups.filter(
             name="moders"
         ).exists():  # если не входит в группу модеров
             return queryset.filter(
@@ -51,7 +52,7 @@ class LessonAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if not request.user.groups.filter(
+        if not self.request.user.groups.filter(
             name="moders"
         ).exists():  # если не входит в группу модеров
             return queryset.filter(
