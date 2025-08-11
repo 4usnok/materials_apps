@@ -45,6 +45,12 @@ class LessonAPIView(generics.ListAPIView):
     serializer_class = LessonSerializers
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if not request.user.groups.filter(name="moders").exists(): # если не входит в группу модеров
+            return queryset.filter(owner=self.request.user) # показать для владельцев только их объекты
+        return queryset # А, если входит, то весь список
+
 
 class LessonAPICreate(generics.CreateAPIView):
     """Создание урока"""
