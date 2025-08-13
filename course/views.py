@@ -1,4 +1,3 @@
-from django.template.context_processors import request
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 
