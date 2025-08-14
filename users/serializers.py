@@ -1,3 +1,4 @@
+from django.utils.timezone import now
 from rest_framework import serializers
 
 from users.models import Payments, User, Subscription
@@ -18,6 +19,16 @@ class PaymentsSerializers(serializers.ModelSerializer):
 
 class SubscriptionSerializers(serializers.ModelSerializer):
 
+    subscript_result = serializers.SerializerMethodField()
+
     class Meta:
         model = Subscription
-        fields = "__all__"
+        read_only_fields = ["user", "course"]
+
+    def get_subscript_result(self, obj):
+        if obj.is_active:
+            return 'подписка добавлена'
+        else:
+            return 'подписка удалена'
+
+

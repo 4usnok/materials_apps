@@ -82,7 +82,7 @@ class PaymentsAPIDestroy(generics.DestroyAPIView):
 
 class SubscriptionActivate(APIView):
 
-    def post(self):
+    def post(self, *args, **kwargs):
         user = self.request.user
         course_item = get_object_or_404(Course, pk=self.request.data.get('course_id'))
 

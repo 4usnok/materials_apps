@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from users.models import User, Payments
+from users.models import User, Payments, Subscription
 
 
 @admin.register(User)
@@ -11,3 +11,7 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(Payments)
 class PaymentsAdmin(admin.ModelAdmin):
     list_filter = ("id", "user")
+
+@admin.register(Subscription)
+class PaymentsAdmin(admin.ModelAdmin):
+    list_filter = ("user", "course")

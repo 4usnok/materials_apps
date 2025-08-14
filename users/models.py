@@ -127,9 +127,7 @@ class Subscription(models.Model):
         verbose_name = "Курс",
         help_text = "Выберите курс",
     )
-
-    def __str__(self):
-        return self.user
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Подписка"
