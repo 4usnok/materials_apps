@@ -2,6 +2,7 @@ from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from course.models import Course, Lesson
+from course.paginators import PageNumberPagination
 from course.serializers import CourseSerializers, LessonSerializers
 from users.permissions import IsModer, IsOwner
 
@@ -12,6 +13,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializers
     permission_classes = [IsAuthenticated]
+    pagination_class = PageNumberPagination
 
     def get_permissions(self):
         """Права для разрешения доступа модераторам и владельцам"""
@@ -48,6 +50,7 @@ class LessonAPIView(generics.ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializers
     permission_classes = [IsAuthenticated]
+    pagination_class = PageNumberPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
