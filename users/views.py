@@ -80,6 +80,7 @@ class PaymentsAPIDestroy(generics.DestroyAPIView):
     queryset = Payments.objects.all()
     permission_classes = [IsAuthenticated]
 
+
 class SubscriptionActivate(APIView):
     """Активация подписки"""
 
