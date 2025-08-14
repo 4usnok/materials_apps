@@ -81,9 +81,12 @@ class PaymentsAPIDestroy(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated]
 
 class SubscriptionActivate(APIView):
+    """Активация подписки"""
+
+    permission_classes = [IsAuthenticated]
 
     def post(self, *args, **kwargs):
-        user = self.request.user.id
+        user = self.request.user
         course_item = get_object_or_404(Course, pk=self.request.data.get('course_id'))
 
         subs_item = Subscription.objects.filter(user=user, course=course_item)
