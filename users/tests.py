@@ -80,6 +80,7 @@ class LessonsCreateTestCase(APITestCase):
                 "owner": self.user.id
             }
 
+        # отправляем обновлённые данные
         response = self.client.patch(url, update_data)
         data = response.json()
 
