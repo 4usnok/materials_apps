@@ -88,7 +88,15 @@ class LessonsCreateTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # проверка содержимого json
         self.assertEqual(data.get("title"), "Основы ООП")
-    #
-    # def test_delete_lesson(self):
-    #     """ Тестирование удаления урока """
-    #     pass
+
+
+    def test_delete_lesson(self):
+        """ Тестирование удаления урока """
+        url = reverse("course:lessons_destroy", args=(self.lesson.pk,))
+        response = self.client.delete(url)
+
+        # проверка статус кода
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+        # проверка количества уроков после удаления
+        self.assertEqual(Lesson.objects.count(), 0)

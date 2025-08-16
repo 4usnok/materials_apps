@@ -103,6 +103,5 @@ class LessonAPIDestroy(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
 
     def perform_destroy(self, instance):
-        lesson = instance.save(owner=self.request.user)
-        lesson.user = self.request.user
-        lesson.save()
+        instance.delete()
+
