@@ -1,3 +1,5 @@
+from http.client import responses
+
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase, APIClient
@@ -16,16 +18,24 @@ class LessonsCreateTestCase(APITestCase):
             is_active=True
         )
         self.course = Course.objects.create(
-            title="Программирование"
+            title="Программирование",
+            owner=self.user
+        )
+        self.lesson = Lesson.objects.create(
+            course=self.course,
+            url_on_video="https://www.youtube.com/",
+            title="Основы Django",
+            owner=self.user
         )
         self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+
 
     def test_create_lesson(self):
         """ Тестирование создания урока """
-        self.client.force_authenticate(user=self.user)
         url = reverse("course:lessons_create")
         data = {
-                "title": "Основы python",
+                "title": "Основы Python",
                 "course": self.course.id,
                 "url_on_video": "https://www.youtube.com/",
             }
@@ -41,13 +51,26 @@ class LessonsCreateTestCase(APITestCase):
 
         # проверка записи в БД
         self.assertTrue(
-            Lesson.objects.filter(title='Основы python').exists()
+            Lesson.objects.filter(title='Основы Python').exists()
         )
-    #
-    #
-    # def test_update_lesson(self):
-    #     """ Тестирование редактирования урока """
-    #     pass
+
+
+    def test_update_lesson(self):
+        """ Тестирование просмотра отдельного урока """
+        url = reverse("course:lessons_detail", args=(self.lesson.pk,))
+        response = self.client.get(url)
+        data = {
+                "course": self.course,
+                "url_on_video": "https://www.youtube.com/",
+                "title": "Основы Django",
+                "owner": self.user
+            }
+
+        # проверка статус кода
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # проверка содержимого json
+        self.assertEqual(data.get("title"), self.lesson.title)
+
     #
     # def test_obj_lesson(self):
     #     """ Тестирование просмотра одного урока """
