@@ -3,7 +3,6 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from users.apps import UsersConfig
-from users.models import Subscription
 from users.views import (
     PaymentsAPICreate,
     PaymentsAPIDestroy,
