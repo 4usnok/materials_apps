@@ -11,6 +11,7 @@ from users.models import User
 class LessonsCreateTestCase(APITestCase):
 
     def setUp(self):
+        """ Подготовка данных """
         self.user = User.objects.create_user(
             username="kakas@gmail.com",
             email="kaka@gmail.com",
@@ -97,6 +98,15 @@ class LessonsCreateTestCase(APITestCase):
 
         # проверка статус кода
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-
         # проверка количества уроков после удаления
         self.assertEqual(Lesson.objects.count(), 0)
+
+    def test_list_lessons(self):
+        """ Тестирование просмотра списка уроков """
+        url = reverse("course:lessons_list")
+        response = self.client.get(url)
+
+        # проверка статус кода
+        self.assertEqual(
+            response.status_code, status.HTTP_200_OK
+        )
