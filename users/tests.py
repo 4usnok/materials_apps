@@ -55,7 +55,7 @@ class LessonsCreateTestCase(APITestCase):
         )
 
 
-    def test_update_lesson(self):
+    def test_retrieve_lesson(self):
         """ Тестирование просмотра отдельного урока """
         url = reverse("course:lessons_detail", args=(self.lesson.pk,))
         response = self.client.get(url)
@@ -63,7 +63,7 @@ class LessonsCreateTestCase(APITestCase):
                 "course": self.course,
                 "url_on_video": "https://www.youtube.com/",
                 "title": "Основы Django",
-                "owner": self.user
+                "owner": self.user.id
             }
 
         # проверка статус кода
@@ -71,10 +71,22 @@ class LessonsCreateTestCase(APITestCase):
         # проверка содержимого json
         self.assertEqual(data.get("title"), self.lesson.title)
 
-    #
-    # def test_obj_lesson(self):
-    #     """ Тестирование просмотра одного урока """
-    #     pass
+
+    def test_update_lesson(self):
+        """ Тестирование редактирования урока """
+        url = reverse("course:lessons_update", args=(self.lesson.pk,))
+        update_data = {
+                "title": "Основы ООП",
+                "owner": self.user.id
+            }
+
+        response = self.client.patch(url, update_data)
+        data = response.json()
+
+        # проверка статус кода
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # проверка содержимого json
+        self.assertEqual(data.get("title"), "Основы ООП")
     #
     # def test_delete_lesson(self):
     #     """ Тестирование удаления урока """
