@@ -21,6 +21,7 @@ class CourseSerializers(serializers.ModelSerializer):
     conclusion_of_lessons = LessonSerializers(
         source="lesson_set", read_only=True, many=True
     )
+    subscription_activate = serializers.BooleanField(default=True)
 
     class Meta:
         model = Course

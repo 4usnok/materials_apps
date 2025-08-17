@@ -3,7 +3,7 @@ from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase, APIClient
 
 from course.models import Lesson, Course
-from users.models import User
+from users.models import User, Subscription
 
 
 class LessonsCreateTestCase(APITestCase):
@@ -14,7 +14,6 @@ class LessonsCreateTestCase(APITestCase):
             username="kakas@gmail.com",
             email="kaka@gmail.com",
             password="kakas123",
-            is_active=True
         )
         self.course = Course.objects.create(
             title="Программирование",
@@ -108,3 +107,69 @@ class LessonsCreateTestCase(APITestCase):
         self.assertEqual(
             response.status_code, status.HTTP_200_OK
         )
+
+    def test_activate_subscription(self):
+        """ Тестирование активированной подписки """
+        url = reverse("course:subscription_activate")
+
+        # данные для активированной подписки
+        data_for_activate = {
+                "course_id": self.course.id,
+                "subscription_activate": True
+             }
+        response_for_activ_subs = self.client.post(
+            url,
+            data_for_activate,
+            format='json'
+        )
+
+        # тестирование статус кода активации подписки
+        self.assertEqual(
+            response_for_activ_subs.status_code, status.HTTP_200_OK
+        )
+        # тестирование активированной подписки
+        response_data = response_for_activ_subs.json()
+        print(response_data)
+
+        self.assertTrue(
+            response_data
+        )
+
+    def test_delete_subscription(self):
+        """ Тестирование удаления подписки """
+        Subscription.objects.create(user=self.user, course=self.course) # создадим подписку
+        url = reverse("course:subscription_activate")
+
+        # данные для деактивации подписки
+        data_for_deactivate_subs = {
+                "course_id": self.course.id,
+                "subscription_activate": False
+             }
+        response_for_activ_subs = self.client.post(
+            url,
+            data_for_deactivate_subs,
+            format='json'
+        )
+
+        # тестирование статус кода деактивации подписки
+        self.assertEqual(
+            response_for_activ_subs.status_code, status.HTTP_200_OK
+        )
+        # тестирование деактивированной подписки
+        response_data_deactivate = response_for_activ_subs.json()
+        print(response_data_deactivate)
+        self.assertFalse(
+            response_data_deactivate.get("subscription_activate"), "подписка удалена"
+        )
+
+    def test_unauthorized_access(self):
+        """ Тестирование ошибки 401 для неавторизованных пользователей """
+        self.client.force_authenticate(user=None)
+        url = reverse("course:lessons_detail", args=(self.lesson.pk,))
+        response = self.client.get(url)
+
+        # тестирование статус для неавторизованного пользователя
+        self.assertEqual(
+            response.status_code, status.HTTP_401_UNAUTHORIZED
+        )
+

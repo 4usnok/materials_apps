@@ -10,7 +10,7 @@ from users.views import (
     PaymentsListAPIView,
     UserViewSet,
     PaymentsDetailList,
-    UserCreateAPIView, SubscriptionActivate,
+    UserCreateAPIView
 )
 
 app_name = UsersConfig.name
@@ -37,7 +37,4 @@ urlpatterns = [
     path(
         "payments/detail/<int:pk>", PaymentsDetailList.as_view(), name="payments-detail"
     ),
-    path(
-        "subscription/", SubscriptionActivate.as_view(), name="subscription_activate"
-    )
 ] + router.urls
