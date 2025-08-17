@@ -60,3 +60,5 @@ pip install -r requirements.txt
 * Откат всех миграций: `python manage.py migrate name_migration`, где `name_migration` -> название миграции.
 * Создание фикстуры для модели пользователей `User`: `python -Xutf8 manage.py dumpdata users.User --output users_fixture.json --indent 4`
 * Создание фикстуры для модели платежей `Payments`: `python -Xutf8 manage.py dumpdata users.Payments --output payments_fixture.json --indent 4`
+* Создания файла с покрытием `.coverage`: `coverage run --source='.' manage.py test`
+* Посмотреть покрытие unit-тестами: `coverage report`
