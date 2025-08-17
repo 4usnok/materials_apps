@@ -110,6 +110,7 @@ class LessonAPIDestroy(generics.DestroyAPIView):
     def perform_destroy(self, instance):
         instance.delete()
 
+
 class SubscriptionActivate(APIView):
     """Активация подписки"""
 
@@ -117,15 +118,14 @@ class SubscriptionActivate(APIView):
 
     def post(self, *args, **kwargs):
         user = self.request.user
-        course_item = get_object_or_404(Course, pk=self.request.data.get('course_id'))
+        course_item = get_object_or_404(Course, pk=self.request.data.get("course_id"))
 
         subs_item = Subscription.objects.filter(user=user, course=course_item)
 
         if subs_item.exists():
             subs_item.delete()
-            message = 'подписка удалена'
+            message = "подписка удалена"
         else:
             Subscription.objects.create(user=user, course=course_item)
-            message = 'подписка добавлена'
+            message = "подписка добавлена"
         return Response({"message": message})
-

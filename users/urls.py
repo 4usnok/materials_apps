@@ -10,7 +10,7 @@ from users.views import (
     PaymentsListAPIView,
     UserViewSet,
     PaymentsDetailList,
-    UserCreateAPIView
+    UserCreateAPIView,
 )
 
 app_name = UsersConfig.name

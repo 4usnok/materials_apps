@@ -46,10 +46,7 @@ class Lesson(models.Model):
     """Модель "Урок" """
 
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
     )
     course = models.ForeignKey(
         Course,

@@ -12,6 +12,7 @@ class UserAdmin(admin.ModelAdmin):
 class PaymentsAdmin(admin.ModelAdmin):
     list_filter = ("id", "user")
 
+
 @admin.register(Subscription)
 class PaymentsAdmin(admin.ModelAdmin):
     list_filter = ("user", "course")
