@@ -2,11 +2,10 @@ from rest_framework import generics, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
-from course.models import Course, Lesson
+from course.models import Course, Lesson, Subscription
 from course.paginators import PageNumberPagination
 from course.serializers import CourseSerializers, LessonSerializers
 from users.permissions import IsModer, IsOwner
-from users.models import Subscription
 
 from rest_framework.response import Response
 from rest_framework.views import APIView

@@ -111,25 +111,3 @@ class Payments(models.Model):
             "-date_of_payment",
             "user",
         ]  # Сортировка по убыванию сначала по дате, потом по пользователю
-
-
-class Subscription(models.Model):
-    """Модель 'Подписка'"""
-
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        verbose_name="Подписчик",
-        help_text="Выберите подписчика",
-    )
-    course = models.ForeignKey(
-        Course,
-        on_delete=models.CASCADE,
-        verbose_name="Курс",
-        help_text="Выберите курс",
-    )
-
-    class Meta:
-        verbose_name = "Подписка"
-        verbose_name_plural = "Подписки"
-        ordering = ["user", "course"]

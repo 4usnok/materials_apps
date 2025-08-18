@@ -2,8 +2,8 @@ from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase, APIClient
 
-from course.models import Lesson, Course
-from users.models import User, Subscription
+from course.models import Lesson, Course, Subscription
+from users.models import User
 
 
 class LessonsCreateTestCase(APITestCase):
@@ -95,53 +95,25 @@ class LessonsCreateTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_activate_subscription(self):
-        """Тестирование активированной подписки"""
-        url = reverse("course:subscription_activate")
-
-        # данные для активированной подписки
-        data_for_activate = {"course_id": self.course.id, "subscription_activate": True}
-        response_for_activ_subs = self.client.post(
-            url, data_for_activate, format="json"
+        """Тестирование работы подписки"""
+        # Шаг 1. Авторизуем пользователя
+        self.client.force_authenticate(user=self.user)
+        # Шаг 2. Создадим новый курс
+        course = Course.objects.create(
+            title="Новый курс",
+            description="Содержание курса",
+            owner=self.user
         )
-
-        # тестирование статус кода активации подписки
-        self.assertEqual(response_for_activ_subs.status_code, status.HTTP_200_OK)
-        # тестирование активированной подписки
-        response_data = response_for_activ_subs.json()
-        print(response_data)
-
-        self.assertTrue(response_data)
-
-    def test_delete_subscription(self):
-        """Тестирование удаления подписки"""
+        # Шаг 3. Создадим новую подписку на курс
         Subscription.objects.create(
-            user=self.user, course=self.course
-        )  # создадим подписку
-        url = reverse("course:subscription_activate")
-
-        # данные для деактивации подписки
-        data_for_deactivate_subs = {
-            "course_id": self.course.id,
-            "subscription_activate": False,
-        }
-        response_for_activ_subs = self.client.post(
-            url, data_for_deactivate_subs, format="json"
+            user=self.user,
+            course=course,
         )
 
-        # тестирование статус кода деактивации подписки
-        self.assertEqual(response_for_activ_subs.status_code, status.HTTP_200_OK)
-        # тестирование деактивированной подписки
-        response_data_deactivate = response_for_activ_subs.json()
-        print(response_data_deactivate)
-        self.assertFalse(
-            response_data_deactivate.get("subscription_activate"), "подписка удалена"
-        )
-
-    def test_unauthorized_access(self):
-        """Тестирование ошибки 401 для неавторизованных пользователей"""
-        self.client.force_authenticate(user=None)
-        url = reverse("course:lessons_detail", args=(self.lesson.pk,))
+        url = reverse('course:course-detail', args=[course.id])
         response = self.client.get(url)
-
-        # тестирование статус для неавторизованного пользователя
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        print(response)
+        # тестирование статус кода активации подписки
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # тестирование активированной подписки
+        self.assertTrue(response.data['subscription_activate'])

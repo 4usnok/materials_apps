@@ -1,7 +1,6 @@
-from django.utils.timezone import now
 from rest_framework import serializers
 
-from users.models import Payments, User, Subscription
+from users.models import Payments, User
 
 
 class UserSerializers(serializers.ModelSerializer):

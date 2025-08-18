@@ -15,7 +15,7 @@ from course.views import (
 app_name = CourseConfig.name
 
 router = DefaultRouter()
-router.register(r"course", CourseViewSet, basename="course")
+router.register(r"", CourseViewSet, basename="course")
 
 urlpatterns = [
     path("lessons/", LessonAPIView.as_view(), name="lessons_list"),
