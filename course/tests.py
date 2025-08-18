@@ -110,7 +110,6 @@ class LessonsCreateTestCase(APITestCase):
         # Подготовка отправки данных в тесте
         url = reverse("course:course-detail", kwargs={"pk": course.id})
         response = self.client.get(url)
-        print(response)
         # Шаг 4. Тестируем на статус код и в тесте делаем запрос на detail-view курса
         # тестирование статус кода активации подписки
         self.assertEqual(response.status_code, status.HTTP_200_OK)
