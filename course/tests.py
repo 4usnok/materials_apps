@@ -110,7 +110,7 @@ class LessonsCreateTestCase(APITestCase):
             course=course,
         )
 
-        url = reverse('course:course-detail', args=[course.id])
+        url = reverse('course:course-detail', kwargs={'pk': course.id})
         response = self.client.get(url)
         print(response)
         # тестирование статус кода активации подписки
