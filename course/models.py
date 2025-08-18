@@ -91,3 +91,25 @@ class Lesson(models.Model):
             "image",
             "url_on_video",
         ]
+
+
+class Subscription(models.Model):
+    """Модель 'Подписка'"""
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="Подписчик",
+        help_text="Выберите подписчика",
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name="Курс",
+        help_text="Выберите курс",
+    )
+
+    class Meta:
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
+        ordering = ["user", "course"]

@@ -3,7 +3,6 @@ from rest_framework import generics, viewsets
 from rest_framework.filters import OrderingFilter
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
-
 from users.models import Payments, User
 from users.serializers import PaymentsSerializers, UserSerializers
 
