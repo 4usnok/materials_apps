@@ -105,8 +105,4 @@ class SessionAPICreate(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = SessionSerializers
 
-    def perform_create(self, serializer):
-        price = serializer.save()
-        link = create_session_to_url(price)
-        price.link = link
-        price.save()
+
