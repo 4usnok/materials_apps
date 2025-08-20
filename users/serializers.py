@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from users.models import Payments, User
+from users.models import Payments, User, Product, Price
 
 
 class UserSerializers(serializers.ModelSerializer):
@@ -15,3 +15,19 @@ class PaymentsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Payments
         fields = "__all__"
+
+class ProductSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = "__all__"
+
+class PriceSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = Price
+        fields = ['currency', 'unit_amount']
+
+
+class SessionSerializers(serializers.Serializer):
+    amount = serializers.DecimalField(max_digits=10, decimal_places=2)

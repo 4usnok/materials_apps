@@ -111,3 +111,75 @@ class Payments(models.Model):
             "-date_of_payment",
             "user",
         ]  # Сортировка по убыванию сначала по дате, потом по пользователю
+
+class Product(models.Model):
+    """Модель `Продукт`"""
+
+    name = models.CharField(
+        max_length=20,
+        verbose_name="Название продукта",
+        help_text="Напишите название продукта"
+    )
+    description = models.TextField(
+        max_length=400,
+        blank=True,
+        null=True,
+        verbose_name="Описание",
+        help_text="Заполните описание продукта"
+    )
+    link = models.URLField(
+        max_length=400,
+        blank=True,
+        null=True,
+        verbose_name="Ссылка на оплату",
+        help_text="Укажите ссылку на оплату"
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
+        ordering = [
+            "name",
+            "description",
+            "link",
+        ]
+
+class Price(models.Model):
+    """Модель `Цена`"""
+
+    product = models.ForeignKey(
+        Product,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        verbose_name="Продукт",
+        help_text="Выберите продукт"
+    )
+    currency = models.CharField(
+        max_length=3,
+        blank=True,
+        null=True,
+        verbose_name="Валюта",
+        help_text="Напишите валюту"
+    )
+    unit_amount = models.DecimalField(
+        max_digits=19,
+        decimal_places=4,
+        verbose_name ="Цена продукта",
+        help_text="Укажите цену продукта",
+    )
+
+    def __str__(self):
+        return self.product
+
+    class Meta:
+        verbose_name = "Цена"
+        verbose_name_plural = "Цены"
+        ordering = [
+            "unit_amount",
+            "product",
+            "currency",
+        ]
