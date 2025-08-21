@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "course",
     "users",
+    'django_celery_beat',
 ]
 
 AUTH_USER_MODEL = "users.User"
