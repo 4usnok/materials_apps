@@ -11,6 +11,7 @@ from users.views import (
     UserViewSet,
     PaymentsDetailList,
     UserCreateAPIView,
+    PaymentsStatus,
 )
 
 app_name = UsersConfig.name
@@ -37,4 +38,5 @@ urlpatterns = [
     path(
         "payments/detail/<int:pk>", PaymentsDetailList.as_view(), name="payments-detail"
     ),
+    path("payments/status/<int:pk>", PaymentsStatus.as_view(), name="payments-status"),
 ] + router.urls

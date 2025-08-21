@@ -1,16 +1,15 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from requests import session
 from rest_framework import generics, viewsets
 from rest_framework.filters import OrderingFilter
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
-from users.models import Payments, User, Product, Price
+from users.models import Payments, User, Product
 from users.serializers import (
     PaymentsSerializers,
     UserSerializers,
     ProductSerializers,
     PriceSerializers,
-    SessionSerializers,
+    PaymentStatusSerializer,
 )
 from users.services import create_product, create_price, create_session_to_url
 
@@ -55,8 +54,8 @@ class PaymentsAPICreate(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         """Автоматическая подвязка поля пользователя к модели"""
-        product = create_product() # вызов сервисной функции продукта
-        price = create_price() # вызов сервисной функции цены
+        product = create_product()  # вызов сервисной функции продукта
+        price = create_price()  # вызов сервисной функции цены
 
         # Создаем сессию
         session_id, session_url = create_session_to_url(price)
@@ -67,6 +66,18 @@ class PaymentsAPICreate(generics.CreateAPIView):
             create_price=price,  # объект цены
             session_id=session_id,  # ← объект сессии
         )
+
+
+class PaymentsStatus(generics.RetrieveAPIView):
+    """Просмотр статуса платежа"""
+
+    queryset = Payments.objects.all()
+    serializer_class = PaymentStatusSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """Пользователь видит только свои платежи"""
+        return Payments.objects.filter(user=self.request.user)
 
 
 class PaymentsAPIUpdate(generics.UpdateAPIView):

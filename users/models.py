@@ -86,6 +86,7 @@ class Payments(models.Model):
         help_text="Укажите сумму в формате 100.00",
         verbose_name="Сумма оплаты",
     )
+    status = models.BooleanField(default=True)
 
     class PaymentMethod(models.TextChoices):
         CASH = (

@@ -17,6 +17,13 @@ class PaymentsSerializers(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class PaymentStatusSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Payments
+        fields = ["status"]  # только поле статуса
+
+
 class ProductSerializers(serializers.ModelSerializer):
 
     class Meta:
