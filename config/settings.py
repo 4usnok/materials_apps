@@ -144,3 +144,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
+
+SITE_URL = "https://127.0.0.1:8000/"

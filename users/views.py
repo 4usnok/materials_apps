@@ -1,12 +1,18 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from requests import session
 from rest_framework import generics, viewsets
 from rest_framework.filters import OrderingFilter
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from users.models import Payments, User, Product, Price
-from users.serializers import PaymentsSerializers, UserSerializers, ProductSerializers, PriceSerializers, \
-    SessionSerializers
-from users.services import create_product, create_session_to_url, create_price
+from users.serializers import (
+    PaymentsSerializers,
+    UserSerializers,
+    ProductSerializers,
+    PriceSerializers,
+    SessionSerializers,
+)
+from users.services import create_product, create_price, create_session_to_url
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -49,9 +55,18 @@ class PaymentsAPICreate(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         """Автоматическая подвязка поля пользователя к модели"""
-        payments = serializer.save(user=self.request.user)
-        payments.user = self.request.user
-        payments.save()
+        product = create_product() # вызов сервисной функции продукта
+        price = create_price() # вызов сервисной функции цены
+
+        # Создаем сессию
+        session_id, session_url = create_session_to_url(price)
+
+        payment = serializer.save(
+            user=self.request.user,
+            create_product_id=product.id,  # ID продукта
+            create_price=price,  # объект цены
+            session_id=session_id,  # ← объект сессии
+        )
 
 
 class PaymentsAPIUpdate(generics.UpdateAPIView):
@@ -76,6 +91,7 @@ class PaymentsAPIDestroy(generics.DestroyAPIView):
     queryset = Payments.objects.all()
     permission_classes = [IsAuthenticated]
 
+
 class ProductAPICreate(generics.CreateAPIView):
     """Создание продукта"""
 
@@ -87,6 +103,7 @@ class ProductAPICreate(generics.CreateAPIView):
         product = serializer.save(user=self.request.user)
         product.save()
 
+
 class PriceAPICreate(generics.CreateAPIView):
     """Создание цены"""
 
@@ -97,12 +114,3 @@ class PriceAPICreate(generics.CreateAPIView):
     def perform_create(self, serializer):
         price = serializer.save(user=self.request.user)
         price.save()
-
-class SessionAPICreate(generics.CreateAPIView):
-    """Создание сессии"""
-
-    queryset = Price.objects.all()
-    permission_classes = [IsAuthenticated]
-    serializer_class = SessionSerializers
-
-

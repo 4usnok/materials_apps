@@ -22,7 +22,7 @@ urlpatterns = [
     path("course/", include("course.urls", namespace="course")),
     path("users/", include("users.urls", namespace="users")),
     path(
-        "swagger/",
+        "/api/swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
