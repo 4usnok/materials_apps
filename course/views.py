@@ -57,15 +57,13 @@ class CourseViewSet(viewsets.ModelViewSet):
 
         # Проверка прав
         if course.owner != request.user:
-            return Response(
-                {"error": "У вас нет прав для редактирования этого курса"}
-            )
+            return Response({"error": "У вас нет прав для редактирования этого курса"})
 
         # Обновление данных
         serializer = self.get_serializer(
             course,
             data=request.data,  # данные из запроса
-            partial=True  # разрешаем частичное обновление
+            partial=True,  # разрешаем частичное обновление
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
