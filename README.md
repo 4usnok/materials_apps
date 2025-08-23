@@ -81,3 +81,4 @@ pip install -r requirements.txt
 * Создание фикстуры для модели платежей `Payments`: `python -Xutf8 manage.py dumpdata users.Payments --output payments_fixture.json --indent 4`
 * Создания файла с покрытием `.coverage`: `coverage run --source='.' manage.py test`
 * Посмотреть покрытие unit-тестами: `coverage report`
+* Запуск обработчика очереди (worker) для получения задач и их выполнения: `celery -A config worker -l INFO`
