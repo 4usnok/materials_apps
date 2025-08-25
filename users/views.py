@@ -54,17 +54,18 @@ class PaymentsAPICreate(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         """Автоматическая подвязка поля пользователя к модели"""
-        product = create_product()  # вызов сервисной функции продукта
-        price = create_price()  # вызов сервисной функции цены
+        product = create_product("test_name", "test_info")  # вызов сервисной функции продукта
+        price = create_price(product, 1555)  # вызов сервисной функции цены
 
         # Создаем сессию
         session_id, session_url = create_session_to_url(price)
 
         payment = serializer.save(
             user=self.request.user,
-            create_product_id=product.id,  # ID продукта
-            create_price=price,  # объект цены
-            session_id=session_id,  # ← объект сессии
+            stripe_product_id=product.id,  # ID продукта в Stripe
+            stripe_price_id=price.id,  # ID цены в Stripe
+            stripe_session_id=session_id,  # ID сессии
+            payment_url=session_url  # URL для оплаты
         )
 
 
