@@ -18,16 +18,27 @@ pip install -r requirements.txt
 1. Содержит `models.py`:
 * Модель курса `Course`
 * Модель урока `Lesson`
+* Модель подписки `Subscription`
+
 2. Содержит `serializers.py`:
 * Сериализатор для модели `Lesson` -> `LessonSerializers`
+* Сериализатор для модели `Course` -> `CourseSerializers`
 * Сериализатор для модели `Course` -> `CourseSerializers`
 3. Содержит `views.py`:
 * `CourseViewSet` -> ViewSet CRUD для модели `Course`
 * `LessonAPIView` -> Просмотр списка уроков
 * `LessonAPICreate` -> Создание урока
-* `LessonAPIUpdate` -> Просмотр отдельного урока
+* `LessonAPIUpdate` -> Редактирование урока
+* `LessonList` -> Просмотр отдельного урока
 * `LessonAPIDestroy` -> Удаление урока
+* `SubscriptionActivate` -> Активация подписки
 4. Содержит `permissions.py` -> классы прав доступа для групп админки
+5. Содержит `paginators.py` -> для создания пагинации просмотра объектов
+6. Содержит `tests.py` -> для тестов
+7. Содержит `validators.py` -> для создания валидации
+8. Содержит `tasks.py` -> для периодических задач:
+* `send_info_about_update_course` -> функция для отправки сообщения на электронную почту
+* `check_login_user` -> функция изменения статуса на неактивный, в случае, если пользователь не был онлайн не меньше месяца
 
 
 ## Приложение `users`
@@ -45,12 +56,26 @@ pip install -r requirements.txt
 * `PaymentsAPIUpdate` -> Редактирование платежа
 * `PaymentsDetailList` -> Просмотр отдельного платежа
 * `PaymentsAPIDestroy` -> PaymentsAPIDestroy
+4. Содержит `services.py` -> для сервисных функций:
+* Содержит сервисную функцию `create_product` -> для создания продукта
+* Содержит сервисную функцию `create_price` -> для создания цены
+* Содержит сервисную функцию `create_session_to_url` -> для создания сессии для получения ссылки на оплату
+5. Содержит `permission.py` -> для прав доступа:
+* Содержит `has_permission` -> для разрешения доступа только модераторам
+* Содержит `IsOwner` -> для разрешения доступа только владельцам
+
+## Работа с программой
+1. Чтобы подключить возможность отправки сообщений на почту при обновлении курса, необходимо сделать следующее:
+* Запустить redis-сервер: `./redis-server.exe`
+* Запустить worker: `celery -A config worker -l INFO`
+* Запустить beat: `celery -A config beat -l INFO`
+2. Запуск сервера осуществляется командой: `python manage.py runserver`
 
 ## Прочие файлы
 1. `.env.sample` -> Заполняется в первую очередь(предназначен для заполнений host, port, пароля от бд, названия бд и тд.)
 2. `payments_fixture.json` -> содержит json-файлы модели `Payments`
 3. `users_fixture.json` -> содержит json-файлы модели `User`
-4. `Readme.md` -> содержит документацию проекта
+4. `Readme.md` -> содержит описание проекта
 
 # Полезные команды
 * Запуск сервера: `python manage.py runserver`,
@@ -62,3 +87,6 @@ pip install -r requirements.txt
 * Создание фикстуры для модели платежей `Payments`: `python -Xutf8 manage.py dumpdata users.Payments --output payments_fixture.json --indent 4`
 * Создания файла с покрытием `.coverage`: `coverage run --source='.' manage.py test`
 * Посмотреть покрытие unit-тестами: `coverage report`
+* Запуск обработчика очереди (worker) для получения задач и их выполнения: `celery -A config worker -l INFO`
+* Запуск redis-server: `./redis-server.exe`
+* Запуск redis-cli: `./redis-cli.exe`

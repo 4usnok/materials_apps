@@ -1,10 +1,12 @@
 from rest_framework import generics, viewsets
+from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
 from course.models import Course, Lesson, Subscription
 from course.paginators import PageNumberPagination
 from course.serializers import CourseSerializers, LessonSerializers
+from course.tasks import send_info_about_update_course
 from users.permissions import IsModer, IsOwner
 
 from rest_framework.response import Response
@@ -38,6 +40,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         course.save()
 
     def get_queryset(self):
+        """Права доступа"""
         queryset = super().get_queryset()
         if not self.request.user.groups.filter(
             name="moders"
@@ -46,6 +49,29 @@ class CourseViewSet(viewsets.ModelViewSet):
                 owner=self.request.user
             )  # показать для владельцев только их объекты
         return queryset  # А, если входит, то весь список
+
+    @action(detail=True, methods=("patch",))
+    def course_update(self, request, pk):
+        """Обновление курса"""
+        course = get_object_or_404(Course, pk=pk)
+
+        # Проверка прав
+        if course.owner != request.user:
+            return Response({"error": "У вас нет прав для редактирования этого курса"})
+
+        # Обновление данных
+        serializer = self.get_serializer(
+            course,
+            data=request.data,  # данные из запроса
+            partial=True,  # разрешаем частичное обновление
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        # Отправка уведомления если обновил НЕ владелец
+        send_info_about_update_course.delay(course.owner.email)
+
+        return Response(data=serializer.data)
 
 
 class LessonAPIView(generics.ListAPIView):
@@ -57,6 +83,7 @@ class LessonAPIView(generics.ListAPIView):
     pagination_class = PageNumberPagination
 
     def get_queryset(self):
+        """Права доступа"""
         queryset = super().get_queryset()
         if not self.request.user.groups.filter(
             name="moders"
@@ -116,6 +143,7 @@ class SubscriptionActivate(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, *args, **kwargs):
+        """Добавление или удаление подписки"""
         user = self.request.user
         course_item = get_object_or_404(Course, pk=self.request.data.get("course_id"))
 
