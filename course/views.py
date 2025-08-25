@@ -69,8 +69,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         serializer.save()
 
         # Отправка уведомления если обновил НЕ владелец
-        if course.owner != request.user:
-            send_info_about_update_course.delay(course.owner.email)
+        send_info_about_update_course.delay(course.owner.email)
 
         return Response(data=serializer.data)
 
