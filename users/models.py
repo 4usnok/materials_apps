@@ -86,7 +86,29 @@ class Payments(models.Model):
         help_text="Укажите сумму в формате 100.00",
         verbose_name="Сумма оплаты",
     )
-    status = models.BooleanField(default=True)
+    status = models.BooleanField(
+        default=True
+    )
+    stripe_product_id = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    stripe_price_id = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    stripe_session_id = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    payment_url = models.URLField(
+        max_length=1000,
+        blank=True,
+        null=True
+    )
 
     class PaymentMethod(models.TextChoices):
         CASH = (
