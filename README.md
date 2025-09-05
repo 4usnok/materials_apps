@@ -10,7 +10,11 @@ git clone https://github.com/4usnok/DZ5_DRF_materials_apps.git
 ```
 2. Установите зависимости:
 ```
-pip install -r requirements.txt
+poetry install
+```
+3. Активировать окружение
+```
+poetry env activate
 ```
 # Содержание проекта
 ## Приложение `course`
@@ -82,6 +86,7 @@ pip install -r requirements.txt
 включающий установку зависимостей и настройку окружения.
 
 # Полезные команды
+* Запуск виртуального окружения poetry: `poetry env activate`
 * Запуск сервера: `python manage.py runserver`,
 * Создание суперюзера(админка): `python manage.py createsuperuser`,
 * Создание миграций: `python manage.py makemigrations`,
