@@ -76,6 +76,10 @@ pip install -r requirements.txt
 2. `payments_fixture.json` -> содержит json-файлы модели `Payments`
 3. `users_fixture.json` -> содержит json-файлы модели `User`
 4. `Readme.md` -> содержит описание проекта
+5. `docker-compose.yaml` -> Один конфигурационный файл, который объединяет весь функционал в 
+многоконтейнерном Docker-приложении
+6. `Dockerfile.txt` -> файл с инструкциями для автоматического создания Docker-образов, 
+включающий установку зависимостей и настройку окружения.
 
 # Полезные команды
 * Запуск сервера: `python manage.py runserver`,
@@ -90,3 +94,6 @@ pip install -r requirements.txt
 * Запуск обработчика очереди (worker) для получения задач и их выполнения: `celery -A config worker -l INFO`
 * Запуск redis-server: `./redis-server.exe`
 * Запуск redis-cli: `./redis-cli.exe`
+* Собирает образы для всех сервисов в фоновом режиме, используя Dockerfile, определенный в конфигурации: `docker-compose up -d --build`
+* Вывод логов контейнеризации: `docker-compose logs db`
+* Запускает все сервисы, определенные в файле: `docker-compose up`
