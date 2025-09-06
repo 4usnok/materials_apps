@@ -1,0 +1,40 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    command: poetry run python manage.py runserver
+    volumes:
+      - .:/online_training
+      - static_volume:/online_training/static
+    depends_on:
+      db:
+        condition: service_healthy
+    environment: # для подключения
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+  redis:
+    image: redis:8.2.1-alpine
+    ports:
+      - "6379:6379"
+  db:
+    image: postgres:13.22-alpine3.22
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  celery:
+    build: .
+    command: poetry run celery -A config worker -l INFO
+  celery_beat:
+    build: .
+    command: poetry run celery -A config beat -l INFO
+
+volumes:
+  postgres_data:
+  static_volume:
