@@ -27,7 +27,9 @@ jobs:
         run: pip install poetry
 
       - name: Install dependencies with Poetry
-        run: poetry install --no-interaction --no-ansi
+        run: |
+          poetry env use python3.13
+          poetry install --no-interaction --no-ansi
 
       - name: Run migrations
         run: poetry run python manage.py migrate
