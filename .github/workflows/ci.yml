@@ -4,7 +4,9 @@ on: [push, pull_request]
 
 jobs:
   test:
+
     services:
+
       postgres:
         image: postgres:latest
         env:
