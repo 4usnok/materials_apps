@@ -33,6 +33,10 @@ jobs:
 
       - name: Run migrations
         run: poetry run python manage.py migrate
+        env: # Ключевой момент! Добавляем блок "env" к этому шагу
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DEBUG: ${{ secrets.DEBUG }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }
 
       - name: Run tests
         run: poetry run python manage.py test
